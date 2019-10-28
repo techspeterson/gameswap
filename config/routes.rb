@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get "/users/:id", to: "users#show", as: "user"
-  get "/users/:id/edit", to: "users#edit", as: "edit_user"
+  get "/users/:id/edit_profile", to: "users#edit_profile", as: "edit_user_profile"
+  patch "/users/:id/edit_profile", to: "users#update_profile", as: "user_detail"
+  get "/users/:id/edit_address", to: "users#edit_address", as: "edit_address"
   put "/users/:id", to: "users#update"
   patch "/users/:id", to: "users#update"
 

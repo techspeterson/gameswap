@@ -1,2 +1,23 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1>User: <%= @user.user_detail.username %></h1>
+
+<% if @user == current_user %>
+  <%= link_to "Edit profile", edit_user_profile_path(@user) %><br>
+  <%= link_to "Edit shipping address", "#" %><br>
+  <%= link_to "Edit wishlist", "#" %>
+<% end %>
+
+<p>
+  <strong>Bio:</strong><br>
+  <%= @user.user_detail.bio %>
+</p>
+
+<h2>Wishlist:</h2>
+<% if @user.wishlist_items.any? %>
+  <ul>
+    <% @user.wishlist_items.each do |item| %>
+      <li><%= item.name %> <%= link_to "Remove", "#" %></li>
+    <% end %>
+  </ul>
+<% else %>
+  No items in wishlist
+<% end %>
