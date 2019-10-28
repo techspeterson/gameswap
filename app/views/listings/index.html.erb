@@ -1,2 +1,15 @@
-<h1>Listings#index</h1>
-<p>Find me in app/views/listings/index.html.erb</p>
+<h1>All Listings</h1>
+
+<% @listings.each do |listing| %>
+
+  <div style="border: 1px solid black">
+    <ul>
+      <li><strong><%= link_to listing.title, listing_path(listing) %></strong></li>
+      <li><strong>$<%= number_to_currency(listing.price) %></strong></li>
+      <li><strong>Platform:</strong> <%= listing.platform %></li>
+      <li><strong>Condition:</strong> <%= listing.condition %></li>
+      <li>Posted by <%= listing.user.user_detail.username %></li>
+    </ul>
+  </div>
+
+<% end %>

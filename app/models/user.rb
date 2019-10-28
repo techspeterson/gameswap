@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :wishlist_items
   has_one :address
   has_one :user_detail
+
+  accepts_nested_attributes_for :user_detail, :address
 end

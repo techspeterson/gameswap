@@ -5,7 +5,7 @@ class Listing < ApplicationRecord
 
   enum condition: {
     new_and_unopened: 0,
-    new: 1,
+    new_and_opened: 1,
     slightly_used: 2,
     well_used: 3
   }
