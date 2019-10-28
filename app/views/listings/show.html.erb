@@ -1,2 +1,24 @@
-<h1>Listings#show</h1>
-<p>Find me in app/views/listings/show.html.erb</p>
+<h1>Listing: <%= @listing.title %></h1>
+
+<p>
+  <strong>Posted:</strong> <%= @listing.created_at %> by <%= @listing.user.user_detail.username %>
+</p>
+
+<p>
+  <strong>Platform:</strong> <%= @listing.platform.manufacturer %> <%= @listing.platform.name %>
+</p>
+
+<p>
+  <strong>Genre:</strong> <%= @listing.genre.name %>
+</p>
+
+<p>
+  <strong>Condition:</strong> <%= @listing.condition.humanize %>
+</p>
+
+<h1><%= number_to_currency(@listing.price) %></h1>
+
+<p>
+  <strong>Description:</strong><br>
+  <%= @listing.description %>
+</p>

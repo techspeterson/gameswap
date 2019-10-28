@@ -5,10 +5,10 @@
   <div style="border: 1px solid black">
     <ul>
       <li><strong><%= link_to listing.title, listing_path(listing) %></strong></li>
-      <li><strong>$<%= number_to_currency(listing.price) %></strong></li>
-      <li><strong>Platform:</strong> <%= listing.platform %></li>
-      <li><strong>Condition:</strong> <%= listing.condition %></li>
-      <li>Posted by <%= listing.user.user_detail.username %></li>
+      <li><strong><%= number_to_currency(listing.price) %></strong></li>
+      <li><strong>Platform:</strong> <%= listing.platform.manufacturer %> <%= listing.platform.name %></li>
+      <li><strong>Condition:</strong> <%= listing.condition.humanize %></li>
+      <li>Posted by <%= listing.user.user_detail.username %> at <%= listing.created_at %></li>
     </ul>
   </div>
 

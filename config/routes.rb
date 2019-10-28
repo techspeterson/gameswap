@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  root to: "listings#index"
+  get "/users/:id", to: "users#show", as: "user"
+  get "/users/:id/edit", to: "users#edit", as: "edit_user"
+  put "/users/:id", to: "users#update"
+  patch "/users/:id", to: "users#update"
 
   get "/listings", to: "listings#index", as: "listings"
-  get "/listings/:id", to: "listings#show", as: "listing"
   get "/listings/new", to: "listings#new", as: "new_listing"
+  get "/listings/:id", to: "listings#show", as: "listing"
   get "/listings/:id/edit", to: "listings#edit", as: "edit_listing"
   post "/listings", to: "listings#create"
   put "/listings/:id", to: "listings#update"

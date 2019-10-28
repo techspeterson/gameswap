@@ -1,0 +1,46 @@
+<%= form_with(model: listing, local: true) do |form| %>
+  <% if listing.errors.any? %>
+    <div id="error_explanation">
+      <h2>Failed to save listing</h2>
+      <ul>
+        <% listing.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :condition %>
+    <%= form.select :condition, options_for_select(Listing.conditions.keys.map { |k| [k.humanize, k] }) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :platform_id %>
+    <%= form.select :platform_id, options_for_select(Platform.all.collect {|u| [u.name, u.id]}, :selected => listing.platform_id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :genre_id %>
+    <%= form.select :genre_id, options_for_select(Genre.all.collect {|u| [u.name, u.id]}, :selected => listing.genre_id) %>
+  </div>
+
+  <div class="submit">
+    <%= form.submit %>
+  </div>
+<% end %>
