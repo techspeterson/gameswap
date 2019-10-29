@@ -2,8 +2,11 @@
 
 <% if @user == current_user %>
   <%= link_to "Edit profile", edit_user_profile_path(@user) %><br>
-  <%= link_to "Edit shipping address", "#" %><br>
-  <%= link_to "Edit wishlist", "#" %>
+  <% if @user.address %>
+    <%= link_to "View/edit shipping address", edit_address_path(@user) %>
+  <% else %>
+    <%= link_to "Add shipping address", new_address_path(@user) %>
+  <% end %>
 <% end %>
 
 <p>
@@ -27,7 +30,12 @@ Add item:
 <% if @user.wishlist_items.any? %>
   <ul>
     <% @user.wishlist_items.each do |item| %>
-      <li><%= item.title %> <%= link_to "X", remove_wishlist_item_path(@user, item), method: :delete %></li>
+      <li>
+        <%= item.title %>
+        <% if @user == current_user %>
+          <%= link_to "X", remove_wishlist_item_path(@user, item), method: :delete %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% else %>
