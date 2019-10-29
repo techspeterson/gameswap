@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get "/users/:id", to: "users#show", as: "user"
+  post "/users/:id", to: "users#add_wishlist_item", as: "wishlist_items"
+  delete "/users/:id/:wishlist_id", to: "users#remove_wishlist_item", as: "remove_wishlist_item"
   get "/users/:id/edit_profile", to: "users#edit_profile", as: "edit_user_profile"
   patch "/users/:id/edit_profile", to: "users#update_profile", as: "user_detail"
   get "/users/:id/edit_address", to: "users#edit_address", as: "edit_address"
