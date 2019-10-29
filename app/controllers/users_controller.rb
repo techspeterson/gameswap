@@ -1,26 +1,19 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit_profile, :update_profile, :add_wishlist_item, :remove_wishlist_item, :edit_address]
-  before_action :check_current_user, only: [:edit_profile, :update_profile, :add_wishlist_item, :remove_wishlist_item, :edit_address]
 
   def show
-    if !@user
-      redirect_to root_path
+    @user = User.find(params[:user_id])
+    if @user == current_user
+      redirect_to my_profile_path
+    else
+      @wishlist_item = WishlistItem.new
     end
-
-    @wishlist_item = WishlistItem.new
   end
 
-  private
-
-    def set_user
-      @user = User.find(params[:id])
-    end
-
-    def check_current_user
-      if @user != current_user
-        redirect_to @user
-      end
-    end
+  def my_profile
+    @user = current_user
+    @wishlist_item = WishlistItem.new
+    render :show
+  end
 
 end

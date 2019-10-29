@@ -1,20 +1,22 @@
-class WishlistItemsController < UsersController
-  before_action :set_user, only: [:add_item, :remove_item]
-  before_action :check_current_user, only: [:add_item, :remove_item]
+class WishlistItemsController < ApplicationController
 
   def add_item
-    @wishlist_item = @user.wishlist_items.create!(wishlist_params)
-    redirect_to user_path(@user)
+    @wishlist_item = WishlistItem.new(wishlist_params)
+    @wishlist_item.user = current_user
+    if @wishlist_item.save
+      redirect_to current_user
+    else
+      @user = current_user
+      render "users/show"
+    end
   end
 
   def remove_item
     wishlist_item = WishlistItem.find(params[:wishlist_id])
-    if wishlist_item.user == @user
-      if wishlist_item.user == current_user
-        wishlist_item.delete
-      end
+    if wishlist_item.user == current_user
+      wishlist_item.delete
     end
-    redirect_to user_path(@user)
+    redirect_to wishlist_item.user
   end
 
   private

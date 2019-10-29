@@ -1,0 +1,11 @@
+<h1>Edit Address</h1>
+
+<%= render "form", address: current_user.address %>
+
+<p>
+  <%= link_to "Remove address", edit_address_path, method: :delete %>
+</p>
+
+<p>
+  <%= link_to "Back", user_path(current_user) %>
+<p>

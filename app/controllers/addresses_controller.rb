@@ -1,19 +1,36 @@
-class AddressesController < UsersController
-  before_action :set_user, only: [:edit_address]
-  before_action :check_current_user, only: [:edit_address]
+class AddressesController < ApplicationController
+  before_action :authenticate_user!
 
-  def new_address
+  def new
     @address = Address.new
+    @address.user = current_user
   end
 
-  def create_address
+  def create
+    @address = Address.new(address_params)
+    @address.user = current_user
+
+    if @address.save
+      redirect_to current_user
+    else
+      render :new
+    end
   end
 
-  def edit_address
-    @address = @user.address
+  def edit
   end
 
-  def update_address
+  def update
+    if current_user.address.update(address_params)
+      redirect_to current_user
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    current_user.address.destroy
+    redirect_to current_user
   end
 
   private
