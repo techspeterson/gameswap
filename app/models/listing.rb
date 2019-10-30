@@ -15,5 +15,6 @@ class Listing < ApplicationRecord
   validates :price, numericality: true
 
   has_one_attached :image
-
+  validates :image, content_type: { in: [:png, :jpg, :jpeg, :gif], message: "must be a .png, .jpg or .gif" }
+  validates :image, size: { less_than: 2.megabytes , message: 'must be less than 2MB' }
 end

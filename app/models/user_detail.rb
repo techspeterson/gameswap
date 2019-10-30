@@ -7,4 +7,6 @@ class UserDetail < ApplicationRecord
   validates :username, uniqueness:  { case_sensitive: false }
 
   has_one_attached :avatar
+  validates :avatar, content_type: { in: [:png, :jpg, :jpeg, :gif], message: "must be a .png, .jpg or .gif" }
+  validates :avatar, size: { less_than: 200.kilobytes , message: 'must be less than 200KB' }
 end

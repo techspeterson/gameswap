@@ -3,6 +3,7 @@
 <% @listings.each do |listing| %>
 
   <div style="border: 1px solid black">
+    <%= image_tag listing.image, style:"float:left;" if listing.image.attached? %>
     <ul>
       <li><strong><%= link_to listing.title, listing_path(listing) %></strong></li>
       <li><strong><%= number_to_currency(listing.price) %></strong></li>

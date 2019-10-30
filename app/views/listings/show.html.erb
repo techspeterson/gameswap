@@ -1,5 +1,9 @@
 <h1>Listing: <%= @listing.title %></h1>
 
+<p><%= link_to "Edit listing", edit_listing_path(@listing) if @listing.user == current_user %></p>
+
+<%= image_tag @listing.image if @listing.image.attached? %>
+
 <p>
   <strong>Posted:</strong> <%= @listing.created_at %> by <%= @listing.user.user_detail.username %>
 </p>

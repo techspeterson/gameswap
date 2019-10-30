@@ -14,6 +14,6 @@ class UserDetailsController < ApplicationController
 
   private
     def user_params
-      params.require(:user_detail).permit(:bio)
+      params.require(:user_detail).permit(:bio, :avatar)
     end
 end
