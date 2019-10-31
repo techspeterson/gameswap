@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get "/", to: "listings#index", as: "root"
 
   get "/user_profile/:user_id", to: "user_profile#show", as: "user_profile"
+  get "/user_profile/:user_id/listings", to: "user_profile#listings", as: "user_listings"
 
   get "/user_profile/:user_id/edit_profile", to: "user_details#edit", as: "edit_user_profile"
   patch "/user_profile/:user_id/edit_profile", to: "user_details#update", as: "user_detail"

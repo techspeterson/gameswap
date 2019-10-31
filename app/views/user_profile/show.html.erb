@@ -1,7 +1,7 @@
 <% if @user == current_user %>
   <h1>My profile</h1>
 <% else %>
-  <h1>User: <%= @user.user_detail.username %></h1>
+  <h1>User: <%= @user.username %></h1>
 <% end %>
 
 <% if can? :crud, @user %>
@@ -17,6 +17,8 @@
 <% end %>
 
 <%= image_tag @user.user_detail.avatar, style:"max-width: 100px;" if @user.user_detail.avatar.attached? %>
+
+<p><%= link_to "View this user's listings", user_listings_path(@user) %></p>
 
 <p>
   <strong>Bio:</strong><br>

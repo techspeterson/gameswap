@@ -1,10 +1,14 @@
 class UserProfileController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_user
 
   def show
-    @user = User.find(params[:user_id])
     authorize! :read, @user
     @wishlist_item = WishlistItem.new
+  end
+
+  def listings
+    authorize! :read, @user
   end
 
   private

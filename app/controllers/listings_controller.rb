@@ -1,7 +1,6 @@
 class ListingsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_listing, only: [:show]
-  before_action :set_user_listing, only: [:edit, :update, :destroy]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy]
 
   def index
     @listings = Listing.all

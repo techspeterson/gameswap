@@ -9,7 +9,7 @@
       <li><strong><%= number_to_currency(listing.price) %></strong></li>
       <li><strong>Platform:</strong> <%= listing.platform.manufacturer %> <%= listing.platform.name %></li>
       <li><strong>Condition:</strong> <%= listing.condition.humanize %></li>
-      <li>Posted by <%= listing.user.user_detail.username %> at <%= listing.created_at %></li>
+      <li>Posted by <%= link_to listing.user.username, user_profile_path(listing.user) %> at <%= listing.created_at %></li>
     </ul>
   </div>
 

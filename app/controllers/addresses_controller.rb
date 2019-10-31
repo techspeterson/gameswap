@@ -3,18 +3,18 @@ class AddressesController < UserProfileController
   before_action :set_user
 
   def new
-    authorize! :create, Address
     @address = Address.new
     @address.user = @user
+    authorize! :create, @user.address
   end
 
   def create
-    authorize! :create, Address
+    authorize! :create, @user.address
     @address = Address.new(address_params)
     @address.user = @user
 
     if @address.save
-      redirect_to @user
+      redirect_to user_profile_path(@user)
     else
       render :new
     end
@@ -27,7 +27,7 @@ class AddressesController < UserProfileController
   def update
     authorize! :update, @user.address
     if @user.address.update(address_params)
-      redirect_to @user
+      redirect_to user_profile_path(@user)
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class AddressesController < UserProfileController
   def destroy
     authorize! :destroy, @user.address
     @user.address.destroy
-    redirect_to @user
+    redirect_to user_profile_path(@user)
   end
 
   private

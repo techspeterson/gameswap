@@ -9,6 +9,7 @@ class Ability
     can :read, Listing
 
     if user.present?
+      can :read, User
       can :crud, User, id: user.id
       can :crud, [Listing, UserDetail, Address, WishlistItem], user_id: user.id
 

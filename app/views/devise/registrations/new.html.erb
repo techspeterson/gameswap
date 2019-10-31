@@ -3,12 +3,10 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <%= f.fields_for :user_detail do |detail_f| %>
-    <div class="field">
-      <%= detail_f.label :username %><br />
-      <%= detail_f.text_field :username, autofocus: true %>
-    </div>
-  <% end %>
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />

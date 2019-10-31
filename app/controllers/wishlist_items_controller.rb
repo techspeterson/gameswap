@@ -2,11 +2,11 @@ class WishlistItemsController < UserProfileController
   before_action :set_user
 
   def create
-    authorize! :create, WishlistItem
     @wishlist_item = WishlistItem.new(wishlist_params)
     @wishlist_item.user = @user
+    authorize! :create, @wishlist_item
     if @wishlist_item.save
-      redirect_to current_user
+      redirect_to user_profile_path(@user)
     else
       render "users/show"
     end
@@ -18,7 +18,7 @@ class WishlistItemsController < UserProfileController
       authorize! :destroy, wishlist_item
       wishlist_item.delete
     end
-    redirect_to wishlist_item.user
+    redirect_to user_profile_path(@user)
   end
 
   private
