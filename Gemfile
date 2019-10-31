@@ -68,3 +68,5 @@ gem "countries", "~> 3.0"
 gem "aws-sdk-s3", "~> 1.52"
 
 gem "active_storage_validations", "~> 0.8.3"
+
+gem "cancancan", "~> 3.0"

@@ -1,36 +1,42 @@
-class AddressesController < ApplicationController
+class AddressesController < UserProfileController
   before_action :authenticate_user!
+  before_action :set_user
 
   def new
+    authorize! :create, Address
     @address = Address.new
-    @address.user = current_user
+    @address.user = @user
   end
 
   def create
+    authorize! :create, Address
     @address = Address.new(address_params)
-    @address.user = current_user
+    @address.user = @user
 
     if @address.save
-      redirect_to current_user
+      redirect_to @user
     else
       render :new
     end
   end
 
   def edit
+    authorize! :update, @user.address
   end
 
   def update
-    if current_user.address.update(address_params)
-      redirect_to current_user
+    authorize! :update, @user.address
+    if @user.address.update(address_params)
+      redirect_to @user
     else
       render :edit
     end
   end
 
   def destroy
-    current_user.address.destroy
-    redirect_to current_user
+    authorize! :destroy, @user.address
+    @user.address.destroy
+    redirect_to @user
   end
 
   private

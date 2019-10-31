@@ -1,6 +1,12 @@
 <% if @user == current_user %>
   <h1>My profile</h1>
+<% else %>
+  <h1>User: <%= @user.user_detail.username %></h1>
+<% end %>
+
+<% if can? :crud, @user %>
   <p>
+    <%= link_to "Update account details", edit_user_registration_path %><br>
     <%= link_to "Edit profile", edit_user_profile_path(@user) %><br>
     <% if @user.address %>
       <%= link_to "View/edit shipping address", edit_address_path(@user) %>
@@ -8,8 +14,6 @@
       <%= link_to "Add shipping address", new_address_path(@user) %>
     <% end %>
   </p>
-<% else %>
-  <h1>User: <%= @user.user_detail.username %></h1>
 <% end %>
 
 <%= image_tag @user.user_detail.avatar, style:"max-width: 100px;" if @user.user_detail.avatar.attached? %>
@@ -20,16 +24,20 @@
 </p>
 
 <h2>Wishlist:</h2>
-Add item:
-<%= form_with(model: @wishlist_item, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+<% if can? :create, WishlistItem %>
+  Add item:
+  <%= form_with(model: @wishlist_item, url: wishlist_items_path(@user), local: true) do |form| %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
 
-  <div class="submit">
-    <%= form.submit %>
-  </div>
+    <%= form.hidden_field :user_id, value: @user.id %>
+
+    <div class="submit">
+      <%= form.submit %>
+    </div>
+  <% end %>
 <% end %>
 
 <% if @user.wishlist_items.any? %>
@@ -37,8 +45,8 @@ Add item:
     <% @user.wishlist_items.each do |item| %>
       <li>
         <%= item.title %>
-        <% if @user == current_user %>
-          <%= link_to "X", remove_wishlist_item_path(item), method: :delete %>
+        <% if can? :destroy, item %>
+          <%= link_to "X", remove_wishlist_item_path(@user, item), method: :delete %>
         <% end %>
       </li>
     <% end %>

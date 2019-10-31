@@ -1,7 +1,7 @@
 <h1>Add Address</h1>
 
-<%= render "form", address: @address %>
+<%= render "form", address: @address, url: new_address_path(@user) %>
 
 <p>
-  <%= link_to "Back", user_path(current_user) %>
+  <%= link_to "Back", user_path(@user) %>
 <p>

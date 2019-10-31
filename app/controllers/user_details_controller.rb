@@ -1,12 +1,15 @@
-class UserDetailsController < ApplicationController
+class UserDetailsController < UserProfileController
   before_action :authenticate_user!
+  before_action :set_user
 
   def edit
+    authorize! :update, @user.user_detail
   end
 
   def update
-    if current_user.user_detail.update(user_params)
-      redirect_to current_user, notice: "Profile updated successfully"
+    authorize! :update, @user.user_detail
+    if @user.user_detail.update(user_params)
+      redirect_to @user, notice: "Profile updated successfully"
     else
       render :edit
     end

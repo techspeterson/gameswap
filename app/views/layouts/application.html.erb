@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    <%= link_to "My Profile", user_profile_path(current_user) if user_signed_in? %>
     <%= link_to "Listings", listings_path %>
     <% if user_signed_in? %>
       <%= link_to "Logout", destroy_user_session_path, method: :delete %>

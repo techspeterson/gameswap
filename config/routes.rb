@@ -1,21 +1,19 @@
 Rails.application.routes.draw do
-  get "/users/:user_id", to: "users#show", as: "user"
+  get "/", to: "listings#index", as: "root"
 
-  scope format: false do
-    get "/my_profile", to: "users#my_profile", as: "my_profile"
+  get "/user_profile/:user_id", to: "user_profile#show", as: "user_profile"
 
-    get "/my_profile/edit_profile", to: "user_details#edit", as: "edit_user_profile"
-    patch "/my_profile/edit_profile", to: "user_details#update", as: "user_detail"
+  get "/user_profile/:user_id/edit_profile", to: "user_details#edit", as: "edit_user_profile"
+  patch "/user_profile/:user_id/edit_profile", to: "user_details#update", as: "user_detail"
 
-    get "/my_profile/add_address", to: "addresses#new", as: "new_address"
-    post "/my_profile/add_address", to: "addresses#create", as: "addresses"
-    get "/my_profile/edit_address", to: "addresses#edit", as: "edit_address"
-    patch "/my_profile/edit_address", to: "addresses#update", as: "address"
-    delete "/my_profile/edit_address", to: "addresses#destroy"
+  get "/user_profile/:user_id/add_address", to: "addresses#new", as: "new_address"
+  post "/user_profile/:user_id/add_address", to: "addresses#create", as: "addresses"
+  get "/user_profile/:user_id/edit_address", to: "addresses#edit", as: "edit_address"
+  patch "/user_profile/:user_id/edit_address", to: "addresses#update", as: "address"
+  delete "/user_profile/:user_id/edit_address", to: "addresses#destroy"
 
-    post "/my_profile", to: "wishlist_items#add_item", as: "wishlist_items"
-    delete "/my_profile/:wishlist_id", to: "wishlist_items#remove_item", as: "remove_wishlist_item"
-  end
+  post "/user_profile/:user_id/wishlist", to: "wishlist_items#create", as: "wishlist_items"
+  delete "/user_profile/:user_id/wishlist/:wishlist_id", to: "wishlist_items#destroy", as: "remove_wishlist_item"
 
   get "/listings", to: "listings#index", as: "listings"
   get "/listings/new", to: "listings#new", as: "new_listing"
