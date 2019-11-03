@@ -102,3 +102,13 @@ nav h1, nav a {
   padding: 30px;
   flex-grow: 1;
 }
+
+.notice {
+  color: darkgreen;
+  background: lightgreen;
+}
+
+.alert {
+  color: orangered;
+  background: lightyellow;
+}

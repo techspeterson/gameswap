@@ -1,0 +1,10 @@
+<div class="listing-card">
+  <%= image_tag listing.image, class:"listing-card-img" if listing.image.attached? %>
+  <h3><%= link_to listing.title, listing_path(listing) %></h3>
+  <%= link_to "(Edit)", edit_listing_path(listing) if can? :update, listing %>
+  <%= link_to "(Remove)", listing_path(listing), method: :delete if can? :destroy, listing %><br>
+  <h2 class="listing-price"><%= number_to_currency(listing.price) %></h2><br>
+  <strong>Platform:</strong> <%= listing.platform.manufacturer %> <%= listing.platform.name %><br>
+  <strong>Condition:</strong> <%= listing.condition.humanize %><br>
+  Posted by <%= link_to listing.user.username, user_profile_path(listing.user) %> at <%= listing.created_at %>
+</div>

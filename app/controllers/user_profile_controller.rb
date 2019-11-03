@@ -1,6 +1,6 @@
 class UserProfileController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user
+  before_action :set_user, only: [:show, :listings]
 
   def show
     authorize! :read, @user
@@ -12,7 +12,6 @@ class UserProfileController < ApplicationController
   end
 
   def dashboard
-
   end
 
   private

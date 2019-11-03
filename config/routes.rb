@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "/", to: "listings#index", as: "root"
+  get "/dashboard", to: "user_profile#dashboard", as: "dashboard"
 
   get "/user_profile/:user_id", to: "user_profile#show", as: "user_profile"
   get "/user_profile/:user_id/listings", to: "user_profile#listings", as: "user_listings"

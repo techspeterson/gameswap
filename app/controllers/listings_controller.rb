@@ -3,7 +3,7 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
 
   def index
-    @listings = Listing.order("created_at")
+    @listings = Listing.order("created_at DESC")
   end
 
   def show
@@ -11,14 +11,15 @@ class ListingsController < ApplicationController
   end
 
   def new
-    authorize! :create, Listing
     @listing = Listing.new
+    @listing.user = current_user
+    authorize! :create, @listing
   end
 
   def create
-    authorize! :create, Listing
     @listing = Listing.new(listing_params)
     @listing.user = current_user
+    authorize! :create, @listing
     if @listing.save
       redirect_to @listing
     else

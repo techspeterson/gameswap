@@ -1,0 +1,26 @@
+<div class="profile-quick-info">
+  <%= image_tag current_user.user_detail.avatar, class:"dashboard-av" if current_user.user_detail.avatar.attached? %>
+
+  <h1>Dashboard</h1><br>
+  <%= link_to "My profile", user_profile_path(current_user) %>
+</div>
+
+<h2>My Listings</h2>
+<%= link_to "Add new listing", new_listing_path %>
+
+<% current_user.listings.each do |listing| %>
+  <%= render "card", listing: listing %>
+<% end %>
+
+<hr>
+
+<h2>My Wishlist</h2>
+<% if current_user.wishlist_items.any? %>
+  <ul>
+  <% current_user.wishlist_items.each do |item| %>
+    <li><%= item.title %> <%= link_to "(Search)", "#" %></li>
+  <% end %>
+  </ul>
+<% else %>
+  <em>No items on wishlist</em>
+<% end %>
