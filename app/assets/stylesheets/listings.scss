@@ -1,3 +1,57 @@
 // Place all the styles related to the Listings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// List of listings
+.listing-card {
+  width: 60%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.listing-card::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.listing-price {
+  color: mediumseagreen;
+}
+
+.listing-card a {
+  color: darkslategrey;
+  font-weight: bold;
+}
+
+.listing-card-img {
+  max-width: 200px;
+  float: left;
+  margin-right: 20px;
+}
+
+// Listing show page
+.listing-container {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.listing-container-inner {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.listing-img {
+  max-width: 300px;
+}
+
+.listing-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,18 @@
+<nav>
+  <h1><i class="fas fa-gamepad"></i> GameSwap</h1>
+
+  <div class="nav-links">
+    <!--<%= link_to "My Profile", user_profile_path(current_user) if user_signed_in? %>-->
+    <%= link_to "Listings", listings_path %>
+    <% if user_signed_in? %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Login", new_user_session_path %>
+    <% end %>
+    <% if user_signed_in? %>
+        <%= link_to user_profile_path(current_user), class:"nav-user" do %>
+          <%= current_user.username %> <%= image_tag current_user.user_detail.avatar if current_user.user_detail.avatar.attached? %>
+        <% end %>
+    <% end %>
+  </div>
+</nav>

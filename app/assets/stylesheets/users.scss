@@ -1,3 +1,28 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile-av {
+  max-width: 160px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 30px;
+}
+
+.profile-quick-info {
+  margin-bottom: 20px;
+}
+
+.profile-quick-info h1 {
+  display: inline;
+}
+
+.profile-quick-info::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.profile-bio {
+  margin: 20px 0;
+}

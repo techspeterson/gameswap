@@ -9,7 +9,7 @@ class UserDetailsController < UserProfileController
   def update
     authorize! :update, @user.user_detail
     if @user.user_detail.update(user_params)
-      redirect_to @user, notice: "Profile updated successfully"
+      redirect_to user_profile_path(@user), notice: "Profile updated successfully"
     else
       render :edit
     end

@@ -4,11 +4,15 @@ class UserProfileController < ApplicationController
 
   def show
     authorize! :read, @user
-    @wishlist_item = WishlistItem.new
+    @wishlist_item = WishlistItem.new(user: @user)
   end
 
   def listings
     authorize! :read, @user
+  end
+
+  def dashboard
+
   end
 
   private

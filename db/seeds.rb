@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'open-uri'
 
 admin = User.new(username: "admin", email: "fake@email.com", password: "secret", password_confirmation: "secret")
 admin.user_detail = UserDetail.new(bio: "admin user", is_admin: true)
@@ -18,6 +19,7 @@ user.save!
   password = Faker::Internet.password(min_length: 8)
   user = User.new(username: Faker::Internet.unique.username(specifier: 5..15, separators: %w(_ -)), email: Faker::Internet.unique.email, password: password, password_confirmation: password)
   user.user_detail = UserDetail.new(bio: Faker::Lorem.paragraph)
+  user.user_detail.avatar.attach(io: File.new(open(Faker::Avatar.image)), filename: "avatar.png")
   user.save!
 end
 
@@ -74,7 +76,7 @@ other_games.each do |genre|
 end
 
 gen_1 = [["All 1st generation", ""]]
-gen_2 = [["Atari 2600", "Atari"]]
+gen_2 = [["Atari 2600", "Atari"], ["Atari 5200", "Atari"]]
 gen_3 = [["NES", "Nintendo"]]
 gen_4 = [["SNES", "Nintendo"], ["Game Boy", "Nintendo"]]
 gen_5 = [["PlayStation", "Sony"], ["N64", "Nintendo"], ["Game Boy Color", "Nintendo"]]
@@ -92,7 +94,6 @@ end
 
 users = User.all
 10.times do |i|
-  if i > 0
     Listing.create!(title: Faker::Game.title, condition: rand(0..3), price: rand(1..50), user: users.sample, platform: Platform.all.sample, genre: Genre.all.sample)
   end
 end
