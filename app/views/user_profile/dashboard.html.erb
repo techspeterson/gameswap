@@ -8,8 +8,12 @@
 <h2>My Listings</h2>
 <%= link_to "Add new listing", new_listing_path %>
 
-<% current_user.listings.each do |listing| %>
-  <%= render "card", listing: listing %>
+<% if current_user.listings.any? %>
+  <% current_user.listings.each do |listing| %>
+    <%= render "card", listing: listing %>
+  <% end %>
+<% else %>
+  <p><em>No listings</em></p>
 <% end %>
 
 <hr>

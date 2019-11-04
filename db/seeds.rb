@@ -94,6 +94,5 @@ end
 
 users = User.all
 10.times do |i|
-    Listing.create!(title: Faker::Game.title, condition: rand(0..3), price: rand(1..50), user: users.sample, platform: Platform.all.sample, genre: Genre.all.sample)
-  end
+  Listing.create!(title: Faker::Game.title, condition: rand(0..3), price: rand(1..50), user: users.sample, platform: Platform.all.sample, genre: Genre.all.sample)
 end
