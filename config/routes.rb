@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "/", to: "listings#index", as: "root"
   get "/dashboard", to: "user_profile#dashboard", as: "dashboard"
+  get "/admin/dashboard", to: "user_profile#admin_dashboard", as: "admin_dashboard"
 
   get "/user_profile/:user_id", to: "user_profile#show", as: "user_profile"
   get "/user_profile/:user_id/listings", to: "user_profile#listings", as: "user_listings"
@@ -25,6 +26,10 @@ Rails.application.routes.draw do
   put "/listings/:id", to: "listings#update"
   patch "/listings/:id", to: "listings#update"
   delete "/listings/:id", to: "listings#destroy"
+  get "/listings/search", to: "listings#search", as: "search"
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
+
+  get "/payments/success", to: "payments#success"
+  post "/payments/webhook", to: "payments#webhook"
 end

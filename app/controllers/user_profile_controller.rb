@@ -12,6 +12,16 @@ class UserProfileController < ApplicationController
   end
 
   def dashboard
+    if current_user.user_detail.is_admin
+      @users = User.order("username")
+      render :admin_dashboard
+    elsif params[:sold]
+      @sold = true
+      @listings = current_user.listings.where("is_sold is true")
+    else
+      @sold = false
+      @listings = current_user.listings.where("is_sold is false")
+    end
   end
 
   private

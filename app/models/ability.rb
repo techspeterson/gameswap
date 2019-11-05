@@ -12,6 +12,7 @@ class Ability
       can :read, User
       can :crud, User, id: user.id
       can :crud, [Listing, UserDetail, Address, WishlistItem], user_id: user.id
+      cannot :create, Listing if !user.address
 
       if user.user_detail.is_admin
         can :manage, :all

@@ -21,9 +21,8 @@
   color: mediumseagreen;
 }
 
-.listing-card a {
+.listing-title {
   color: darkslategrey;
-  font-weight: bold;
 }
 
 .listing-card-img {
@@ -40,7 +39,6 @@
 
 .listing-container-inner {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: space-between;
   margin-bottom: 10px;
 }

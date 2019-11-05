@@ -3,11 +3,35 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
 
   def index
-    @listings = Listing.order("created_at DESC")
+    # handles ransack searching/filtering
+    @q.sorts = "created_at desc" if @q.sorts.empty?
+    @listings = @q.result.includes(:genre).includes(:platform).where("is_sold is false")
   end
 
   def show
     authorize! :read, @listing
+    # stripe session
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      customer_email: current_user.email,
+      line_items: [{
+        name: @listing.title,
+        description: @listing.description,
+        amount: @listing.price.to_i * 100,
+        currency: 'aud',
+        quantity: 1,
+      }],
+      payment_intent_data: {
+        metadata: {
+          user_id: current_user.id,
+          listing_id: @listing.id
+        }
+      },
+      success_url: "#{root_url}payments/success?user_id=#{current_user.id}&listing_id=#{@listing.id}",
+      cancel_url: "#{root_url}listings"
+    )
+
+    @session_id = session.id
   end
 
   def new
@@ -44,6 +68,9 @@ class ListingsController < ApplicationController
     authorize! :destroy, @listing
     @listing.destroy
     redirect_to listings_path
+  end
+
+  def search
   end
 
   private

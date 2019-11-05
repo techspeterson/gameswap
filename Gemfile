@@ -72,3 +72,7 @@ gem "active_storage_validations", "~> 0.8.3"
 gem "cancancan", "~> 3.0"
 
 gem "faker", "~> 2.6"
+
+gem "ransack", "~> 2.3"
+
+gem "stripe", "~> 5.7"

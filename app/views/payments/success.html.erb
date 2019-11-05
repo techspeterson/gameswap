@@ -1,0 +1,22 @@
+<h1>Payment successful!</h1>
+
+<div class="listing-container">
+
+  <div class="listing-container-inner">
+    <div class="listing-info">
+      <h1><%= number_to_currency(@listing.price) %></h1>
+
+      <p>
+        <strong>Posted:</strong> <%= @listing.created_at %> by <%= link_to @listing.user.username, user_profile_path(@listing.user) %><br>
+        <strong>Platform:</strong> <%= @listing.platform.manufacturer %> <%= @listing.platform.name %><br>
+        <strong>Genre:</strong> <%= @listing.genre.name %><br>
+        <strong>Condition:</strong> <%= @listing.condition.humanize %>
+      </p>
+    </div>
+
+    <%= image_tag @listing.image, class:"listing-img" if @listing.image.attached? %>
+  </div>
+
+</div>
+
+<%= link_to "Back to listings", listings_path %>

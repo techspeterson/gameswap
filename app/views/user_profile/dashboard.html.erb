@@ -6,11 +6,20 @@
 </div>
 
 <h2>My Listings</h2>
-<%= link_to "Add new listing", new_listing_path %>
+<%= link_to "Add new listing", new_listing_path %><br>
 
-<% if current_user.listings.any? %>
-  <% current_user.listings.each do |listing| %>
-    <%= render "card", listing: listing %>
+View:
+<% if @sold %>
+  <%= link_to "Active listings", dashboard_path %> |
+  <strong>Sold listings</strong>
+<% else %>
+  <strong>Active listings</strong> |
+  <%= link_to "Sold listings", dashboard_path(sold: true) %>
+<% end %>
+
+<% if @listings.any? %>
+  <% @listings.each do |listing| %>
+    <%= render "listings/card", listing: listing %>
   <% end %>
 <% else %>
   <p><em>No listings</em></p>
@@ -22,7 +31,7 @@
 <% if current_user.wishlist_items.any? %>
   <ul>
   <% current_user.wishlist_items.each do |item| %>
-    <li><%= item.title %> <%= link_to "(Search)", "#" %></li>
+    <li><%= item.title %> <%= link_to "(Search)", listings_path(q: {title_cont: item.title}) %></li>
   <% end %>
   </ul>
 <% else %>

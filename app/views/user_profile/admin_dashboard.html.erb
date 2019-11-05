@@ -1,0 +1,16 @@
+<div class="profile-quick-info">
+  <h1>Admin Dashboard</h1>
+</div>
+
+<h2>All Users</h2>
+<!-- <select>
+  <% @users.each do |user| %>
+    <option value="<%= user.id %>"><%= user.username %></option>
+  <% end %>
+</select> -->
+
+<ul>
+<% @users.each do |user| %>
+  <li><%= link_to user.username, user_profile_path(user) %></li>
+<% end %>
+</ul>

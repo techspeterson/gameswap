@@ -1,9 +1,29 @@
 <div class="sidebar">
   <h3>Search all listings</h3>
+  <%= search_form_for @q do |f| %>
+    <!--<%= f.label :title_cont %>-->
+    <%= f.search_field :title_cont %>
+    <%= f.submit %>
+  <% end %>
+
   <h3>Browse listings</h3>
-  <%= link_to "Browse latest", "#" %>
-  <%= link_to "Browse by price", "#" %>
+  <%= link_to "Browse latest", listings_path %> <%=  %>
+  <%= link_to "Browse by title", listings_path(q: {sorts: "title asc"}) %>
+  <%= link_to "Browse by price", listings_path(q: {sorts: "price asc"}) %>
+
   <h4>Browse by platform</h4>
+
+  <%= search_form_for @q do |f| %>
+    <!--<%= f.label :platform_name_eq %>-->
+    <%= f.select :platform_name_eq, options_for_select(Platform.all.collect {|u| [u.name, u.name]}) %>
+    <%= f.submit %>
+  <% end %>
+
   <h4>Browse by genre</h4>
-  <h4>Browse by location</h4>
+
+  <%= search_form_for @q do |f| %>
+    <!--<%= f.label :genre_name_cont %>-->
+    <%= f.select :genre_name_cont, options_for_select(Genre.all.collect {|u| [u.name, u.name]}) %>
+    <%= f.submit %>
+  <% end %>
 </div>
