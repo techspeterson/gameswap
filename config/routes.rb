@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   delete "/user_profile/:user_id/wishlist/:wishlist_id", to: "wishlist_items#destroy", as: "remove_wishlist_item"
 
   get "/listings", to: "listings#index", as: "listings"
+  get "/listings/search", to: "listings#search", as: "search"
   get "/listings/new", to: "listings#new", as: "new_listing"
   get "/listings/:id", to: "listings#show", as: "listing"
   get "/listings/:id/edit", to: "listings#edit", as: "edit_listing"
@@ -26,7 +27,6 @@ Rails.application.routes.draw do
   put "/listings/:id", to: "listings#update"
   patch "/listings/:id", to: "listings#update"
   delete "/listings/:id", to: "listings#destroy"
-  get "/listings/search", to: "listings#search", as: "search"
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 

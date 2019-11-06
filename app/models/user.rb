@@ -3,10 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :authentication_keys => [:username]
-  has_many :listings
-  has_many :wishlist_items
-  has_one :address
-  has_one :user_detail
+  has_many :listings, dependent: :destroy
+  has_many :wishlist_items, dependent: :destroy
+  has_one :address, dependent: :destroy
+  has_one :user_detail, dependent: :destroy
 
   validates :username, length: { in: 5..15, too_short: "should be at least %{count} characters", too_long: "should be no more than %{count} characters" }
   validates :username, format: { with: /\A[a-zA-Z0-9_-]*\z/, message: "should contain alphanumeric characters, underscores or hyphens only"}

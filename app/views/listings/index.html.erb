@@ -1,5 +1,10 @@
 <h1>All Listings</h1>
 
+Sort by:
+<%= sort_link(@q, :created_at, "Date Posted", default_order: :desc) %> |
+<%= sort_link(@q, :title, default_order: :asc) %> |
+<%= sort_link(@q, :price, default_order: :asc) %>
+
 <% @listings.each do |listing| %>
   <%= render "card", listing: listing %>
 <% end %>

@@ -145,7 +145,7 @@ nav h1, nav a {
 
 .notice, .alert, #error_explanation {
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-weight: 600;
 }
 

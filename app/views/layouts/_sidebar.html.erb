@@ -7,7 +7,7 @@
   <% end %>
 
   <h3>Browse listings</h3>
-  <%= link_to "Browse latest", listings_path %> <%=  %>
+  <%= link_to "Browse latest", listings_path %>
   <%= link_to "Browse by title", listings_path(q: {sorts: "title asc"}) %>
   <%= link_to "Browse by price", listings_path(q: {sorts: "price asc"}) %>
 
@@ -26,4 +26,6 @@
     <%= f.select :genre_name_cont, options_for_select(Genre.all.collect {|u| [u.name, u.name]}) %>
     <%= f.submit %>
   <% end %>
+
+  <p><%= link_to "Advanced search", search_path %></p>
 </div>

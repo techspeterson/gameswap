@@ -1,6 +1,8 @@
 class PaymentsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:webhook]
 
+  # the page redirected to upon making a payment
+  # displays details of purchased listing
   def success
     @user = User.find(params[:user_id])
     if @user != current_user
@@ -9,6 +11,7 @@ class PaymentsController < ApplicationController
     @listing = Listing.find(params[:listing_id])
   end
 
+  # webhook sets listing's is_sold to true when the listing is purchased
   def webhook
     payment_id= params[:data][:object][:payment_intent]
     payment = Stripe::PaymentIntent.retrieve(payment_id)

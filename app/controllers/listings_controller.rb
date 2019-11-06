@@ -3,14 +3,15 @@ class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
 
   def index
-    # handles ransack searching/filtering
+    # search queries are redirected to the listings index
+    # listings are displayed in accordance with the search query @q
     @q.sorts = "created_at desc" if @q.sorts.empty?
     @listings = @q.result.includes(:genre).includes(:platform).where("is_sold is false")
   end
 
   def show
     authorize! :read, @listing
-    # stripe session
+    # stripe session for purchasing a listing
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       customer_email: current_user.email,
@@ -35,15 +36,17 @@ class ListingsController < ApplicationController
   end
 
   def new
+    # initialises a blank listing
     @listing = Listing.new
-    @listing.user = current_user
     authorize! :create, @listing
   end
 
   def create
+    # creates a listing for the current user with the submitted params (if valid)
     @listing = Listing.new(listing_params)
-    @listing.user = current_user
     authorize! :create, @listing
+    @listing.user = current_user
+
     if @listing.save
       redirect_to @listing
     else
@@ -70,21 +73,17 @@ class ListingsController < ApplicationController
     redirect_to listings_path
   end
 
+  # view for advanced search form
   def search
   end
 
   private
+    # get listing from id in params
     def set_listing
       @listing = Listing.find(params[:id])
     end
 
-    def set_user_listing
-      @listing = current_user.listings.find(params[:id])
-      if !@listing
-        redirect_to listings_path
-      end
-    end
-
+    # permitted params for listing
     def listing_params
       return params.require(:listing).permit(:title, :description, :condition, :price, :is_sold, :platform_id, :genre_id, :image)
     end

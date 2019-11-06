@@ -86,8 +86,8 @@ gen_8 = [["Wii U", "Nintendo"], ["PlayStation 4", "Sony"], ["Xbox One", "Microso
 
 all_gens = [gen_1, gen_2, gen_3, gen_4, gen_5, gen_6, gen_7, gen_8]
 
-all_gens.each do |gen|
-  gen.each_with_index do |game, index|
+all_gens.each_with_index do |gen, index|
+  gen.each do |game|
     Platform.create!(name: game[0], manufacturer: game[1], generation: (index + 1))
   end
 end

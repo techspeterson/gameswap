@@ -1,0 +1,25 @@
+<h1>Advanced Search</h1>
+
+<%= search_form_for @q do |f| %>
+  <div class="field">
+    <%= f.label :title_cont %>
+    <%= f.search_field :title_cont %>
+  </div>
+
+  <div class="field">
+    <%= f.label :platform_name_eq, "Platform" %>
+    <%= f.select :platform_name_or_platform_generation_eq, options_for_select(Platform.select_options) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :genre_name_cont, "Genre" %>
+    <%= f.select :genre_name_cont, options_for_select(Genre.select_options) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_username_cont, "User" %>
+    <%= f.search_field :user_username_cont %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
