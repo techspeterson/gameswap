@@ -2,7 +2,7 @@
   <h3>Search all listings</h3>
   <%= search_form_for @q do |f| %>
     <!--<%= f.label :title_cont %>-->
-    <%= f.search_field :title_cont %>
+    <%= f.search_field :title_cont, placeholder: "Search by game title" %>
     <%= f.submit %>
   <% end %>
 
@@ -15,7 +15,7 @@
 
   <%= search_form_for @q do |f| %>
     <!--<%= f.label :platform_name_eq %>-->
-    <%= f.select :platform_name_eq, options_for_select(Platform.all.collect {|u| [u.name, u.name]}) %>
+    <%= f.select :platform_name_eq, options_for_select(Platform.search_select_options) %>
     <%= f.submit %>
   <% end %>
 
@@ -23,9 +23,9 @@
 
   <%= search_form_for @q do |f| %>
     <!--<%= f.label :genre_name_cont %>-->
-    <%= f.select :genre_name_cont, options_for_select(Genre.all.collect {|u| [u.name, u.name]}) %>
+    <%= f.select :genre_name_cont, options_for_select(Genre.search_select_options) %>
     <%= f.submit %>
   <% end %>
 
-  <p><%= link_to "Advanced search", search_path %></p>
+  <h4><%= link_to "Advanced search", search_path %></h4>
 </div>

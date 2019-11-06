@@ -32,12 +32,12 @@
 
   <div class="field">
     <%= form.label :platform_id %>
-    <%= form.select :platform_id, options_for_select(Platform.all.collect {|u| [u.name, u.id]}, :selected => listing.platform_id) %>
+    <%= form.select :platform_id, options_for_select(Platform.select_options, :selected => listing.platform_id) %>
   </div>
 
   <div class="field">
     <%= form.label :genre_id %>
-    <%= form.select :genre_id, options_for_select(Genre.all.collect {|u| [u.name, u.id]}, :selected => listing.genre_id) %>
+    <%= form.select :genre_id, options_for_select(Genre.select_options, :selected => listing.genre_id) %>
   </div>
 
   <div class="field">

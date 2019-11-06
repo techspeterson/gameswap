@@ -14,7 +14,9 @@
       </p>
 
       <h1><%= number_to_currency(@listing.price) %></h1>
-      <button data-stripe="payment">Purchase</button>
+      <% if user_signed_in? && @listing.user != current_user %>
+        <button data-stripe="payment">Purchase</button>
+      <% end %>
     </div>
 
     <%= image_tag @listing.image, class:"listing-img" if @listing.image.attached? %>

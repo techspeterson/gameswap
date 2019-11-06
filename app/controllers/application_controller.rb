@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
   # search query object @q is set before every action (because the search forms on the sidebar are on every page)
   def set_query
     @q = Listing.ransack(params[:q])
+    @q.sorts = "created_at desc"
   end
 
   # redirects the user to the dashboard on successful login

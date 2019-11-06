@@ -1,5 +1,5 @@
 class Listing < ApplicationRecord
-  # model relationships
+  # model relations
   belongs_to :user
   belongs_to :platform
   belongs_to :genre

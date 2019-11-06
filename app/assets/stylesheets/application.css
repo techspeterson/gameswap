@@ -157,7 +157,7 @@ nav h1, nav a {
   content: "*";
 }
 
-input[type=submit] {
+button, input[type=submit] {
   padding: 5px 7px;
   background: mediumseagreen;
   border-radius: 5px;

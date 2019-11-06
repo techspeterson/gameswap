@@ -5,34 +5,36 @@ class ListingsController < ApplicationController
   def index
     # search queries are redirected to the listings index
     # listings are displayed in accordance with the search query @q
-    @q.sorts = "created_at desc" if @q.sorts.empty?
     @listings = @q.result.includes(:genre).includes(:platform).where("is_sold is false")
   end
 
   def show
     authorize! :read, @listing
-    # stripe session for purchasing a listing
-    session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      customer_email: current_user.email,
-      line_items: [{
-        name: @listing.title,
-        description: @listing.description,
-        amount: @listing.price.to_i * 100,
-        currency: 'aud',
-        quantity: 1,
-      }],
-      payment_intent_data: {
-        metadata: {
-          user_id: current_user.id,
-          listing_id: @listing.id
-        }
-      },
-      success_url: "#{root_url}payments/success?user_id=#{current_user.id}&listing_id=#{@listing.id}",
-      cancel_url: "#{root_url}listings"
-    )
 
-    @session_id = session.id
+    if user_signed_in?
+      # stripe session for purchasing a listing
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        customer_email: current_user.email,
+        line_items: [{
+          name: @listing.title,
+          description: (@listing.description.blank? ? "no description" : @listing.description),
+          amount: @listing.price.to_i * 100,
+          currency: 'aud',
+          quantity: 1,
+        }],
+        payment_intent_data: {
+          metadata: {
+            user_id: current_user.id,
+            listing_id: @listing.id
+          }
+        },
+        success_url: "#{root_url}payments/success?user_id=#{current_user.id}&listing_id=#{@listing.id}",
+        cancel_url: "#{root_url}listings"
+      )
+
+      @session_id = session.id
+    end
   end
 
   def new
@@ -75,6 +77,11 @@ class ListingsController < ApplicationController
 
   # view for advanced search form
   def search
+    @sort = [
+      ["Date posted", "created_at desc"],
+      ["Title", "title asc"],
+      ["Price", "price asc"]
+    ]
   end
 
   private

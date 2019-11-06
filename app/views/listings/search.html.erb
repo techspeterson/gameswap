@@ -2,23 +2,36 @@
 
 <%= search_form_for @q do |f| %>
   <div class="field">
-    <%= f.label :title_cont %>
-    <%= f.search_field :title_cont %>
+    <%= f.label :title_cont, "Title" %>
+    <%= f.search_field :title_cont, placeholder: "game title" %>
   </div>
 
   <div class="field">
     <%= f.label :platform_name_eq, "Platform" %>
-    <%= f.select :platform_name_or_platform_generation_eq, options_for_select(Platform.select_options) %>
+    <%= f.select :platform_name_or_platform_generation_eq, options_for_select(Platform.search_select_options) %>
   </div>
 
   <div class="field">
     <%= f.label :genre_name_cont, "Genre" %>
-    <%= f.select :genre_name_cont, options_for_select(Genre.select_options) %>
+    <%= f.select :genre_name_cont, options_for_select(Genre.search_select_options) %>
   </div>
 
   <div class="field">
     <%= f.label :user_username_cont, "User" %>
-    <%= f.search_field :user_username_cont %>
+    <%= f.search_field :user_username_cont, placeholder: "username" %>
+  </div>
+
+  <div class="field">
+    Price
+    <%= f.label :price_gteq, "between" %>
+    <%= f.search_field :price_gteq, placeholder: "lower price" %>
+    <%= f.label :price_lteq, "and" %>
+    <%= f.search_field :price_lteq, placeholder: "greater price" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sorts, "Sorted by" %>
+    <%= f.select :sorts, options_for_select(@sort) %>
   </div>
 
   <%= f.submit %>
