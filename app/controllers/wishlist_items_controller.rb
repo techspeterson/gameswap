@@ -3,8 +3,8 @@ class WishlistItemsController < UserProfileController
 
   def create
     @wishlist_item = WishlistItem.new(wishlist_params)
-    authorize! :create, @wishlist_item
     @wishlist_item.user = @user
+    authorize! :create, @wishlist_item
 
     if @wishlist_item.save
       redirect_to user_profile_path(@user), notice: "Wishlist item added: #{@wishlist_item.title}"

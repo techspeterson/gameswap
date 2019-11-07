@@ -100,11 +100,6 @@ nav h1, nav a {
   padding: 10px;
 }
 
-.sidebar form {
-  display: flex;
-  /* flex-direction: column; */
-}
-
 .sidebar input[type=submit] {
   margin-left: 10px;
 }
@@ -164,4 +159,36 @@ button, input[type=submit] {
   border: 0;
   color: darkslategrey;
   font-weight: 600;
+}
+
+label::after {
+  content: ":";
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.sidebar form {
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+}
+
+.field {
+  margin: 5px 0;
+  display: grid;
+  grid-template-columns: 200px 300px;
+}
+
+p {
+  margin: 7px 0;
+}
+
+hr {
+  margin: 20px;
 }

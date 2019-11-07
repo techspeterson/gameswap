@@ -14,9 +14,9 @@ class AddressesController < UserProfileController
 
   def create
     # generates an address for the given user with the given params
-    authorize! :create, @user.address
     @address = Address.new(address_params)
     @address.user = @user
+    authorize! :create, @user.address
 
     if @address.save
       redirect_to user_profile_path(@user), notice: "Address added successfully"

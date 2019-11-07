@@ -13,8 +13,11 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :avatar %> <%= form.file_field :avatar, accept:
-    'image/png,image/gif,image/jpeg,image/jpg' %>
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar, accept:
+    'image/png,image/gif,image/jpeg,image/jpg' %><br>
+    <em><sub>File should be less than 200KB<br>
+    Accepted formats: .jpg, .jpeg, .png, .gif<sub></em>
   </div>
 
   <div class="field">
@@ -23,11 +26,7 @@
   </div>
 
   <div class="submit">
-    <%= form.submit %>
+    <%= form.submit "Update" %>
   </div>
 
 <% end %>
-
-<p>
-  <%= link_to "Back", user_profile_path(@user) %>
-<p>

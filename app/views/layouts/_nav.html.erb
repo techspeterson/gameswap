@@ -1,8 +1,9 @@
 <nav>
-  <h1><i class="fas fa-gamepad"></i> GameSwap</h1>
+  <%= link_to root_path do %>
+    <h1><i class="fas fa-gamepad"></i> GameSwap</h1>
+  <% end %>
 
   <div class="nav-links">
-    <!--<%= link_to "My Profile", user_profile_path(current_user) if user_signed_in? %>-->
     <%= link_to "Listings", listings_path %>
     <% if user_signed_in? %>
       <%= link_to "Dashboard", dashboard_path %>

@@ -27,14 +27,14 @@
   margin: 20px 0;
 }
 
+.wishlist form {
+  flex-direction: row;
+}
+
 // Dashboard
 
 .dashboard-av {
   max-width: 124px;
   border-radius: 50%;
   float: right;
-}
-
-hr {
-  margin: 20px;
 }

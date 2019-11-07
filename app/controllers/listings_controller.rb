@@ -40,12 +40,14 @@ class ListingsController < ApplicationController
   def new
     # initialises a blank listing
     @listing = Listing.new
+    @listing.user = current_user
     authorize! :create, @listing
   end
 
   def create
     # creates a listing for the current user with the submitted params (if valid)
     @listing = Listing.new(listing_params)
+    @listing.user = current_user
     authorize! :create, @listing
     @listing.user = current_user
 

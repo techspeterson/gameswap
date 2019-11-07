@@ -22,11 +22,11 @@
   </div>
 
   <div class="field">
-    Price
-    <%= f.label :price_gteq, "between" %>
-    <%= f.search_field :price_gteq, placeholder: "lower price" %>
-    <%= f.label :price_lteq, "and" %>
-    <%= f.search_field :price_lteq, placeholder: "greater price" %>
+    Price:
+    <div>
+    <%= f.label :price_gteq, "between" %> <%= f.search_field :price_gteq, placeholder: "lower price" %><br>
+    <%= f.label :price_lteq, "and" %> <%= f.search_field :price_lteq, placeholder: "greater price" %>
+    </div>
   </div>
 
   <div class="field">

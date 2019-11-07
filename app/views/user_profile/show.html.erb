@@ -1,21 +1,20 @@
 <div class="profile-quick-info">
-  <% if @user == current_user %>
-    <h1>My profile</h1>
-  <% else %>
-    <h1>User: <%= @user.username %></h1>
-  <% end %>
-
   <%= image_tag @user.user_detail.avatar, class:"profile-av" if @user.user_detail.avatar.attached? %>
+
+  <h1>User: <%= @user.username %></h1>
+  <% if @user.address %>
+    <p><strong>Location:</strong> <%= @user.address.country.name %> <%= @user.address.emoji_flag %></p>
+  <% end %>
 
   <p><%= link_to "View this user's listings", user_listings_path(@user) %></p>
 </div>
 
 <% if can? :crud, @user %>
   <p>
-    <%= link_to "Update account details", edit_user_registration_path %><br>
+    <%= link_to "Edit account details", edit_user_registration_path %><br>
     <%= link_to "Edit profile", edit_user_profile_path(@user) %><br>
     <% if @user.address %>
-      <%= link_to "View/edit shipping address", edit_address_path(@user) %>
+      <%= link_to "Edit shipping address", edit_address_path(@user) %>
     <% else %>
       <%= link_to "Add shipping address", new_address_path(@user) %>
     <% end %>
@@ -27,20 +26,19 @@
   <%= @user.user_detail.bio %>
 </div>
 
+<hr>
+
 <div class="wishlist">
   <h3>Wishlist:</h3>
   <% if can? :create, @wishlist_item %>
-    Add item:
     <%= form_with(model: @wishlist_item, url: wishlist_items_path(@user), local: true) do |form| %>
       <div class="field">
-        <%= form.label :title %>
-        <%= form.text_field :title %>
+        <%= form.label :title, "Add item" %>
+        <%= form.text_field :title, placeholder: "game title" %>
       </div>
 
-      <%= form.hidden_field :user_id, value: @user.id %>
-
       <div class="submit">
-        <%= form.submit %>
+        <%= form.submit "Add to wishlist" %>
       </div>
     <% end %>
   <% end %>
@@ -57,6 +55,6 @@
       <% end %>
     </ul>
   <% else %>
-    No items in wishlist
+    <p><em>No items in wishlist</em></p>
   <% end %>
 </div>

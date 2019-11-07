@@ -5,6 +5,8 @@
   <%= link_to "My profile", user_profile_path(current_user) %>
 </div>
 
+<hr>
+
 <h2>My Listings</h2>
 <%= link_to "Add new listing", new_listing_path %><br>
 
@@ -19,7 +21,7 @@ View:
 
 <% if @listings.any? %>
   <% @listings.each do |listing| %>
-    <%= render "listings/card", listing: listing %>
+    <%= render "listings/card_mine", listing: listing %>
   <% end %>
 <% else %>
   <p><em>No listings</em></p>
