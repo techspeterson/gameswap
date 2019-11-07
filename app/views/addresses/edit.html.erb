@@ -1,3 +1,5 @@
+<%= render "/user_profile/quick_info", user: @user %>
+
 <h1>Edit Address</h1>
 
 <%= render "form", address: @user.address, url: edit_address_path(@user) %>

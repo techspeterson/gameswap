@@ -34,7 +34,7 @@
 
   <div class="field">
     <%= form.label :country_id %>
-    <%= form.select :country_id, options_for_select(Country.all.collect {|u| [u.name, u.id]}) %>
+    <%= form.select :country_id, options_for_select(Country.all.collect {|u| [u.name, u.id]}, selected: address.country_id) %>
   </div>
 
   <div class="field">

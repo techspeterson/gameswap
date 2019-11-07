@@ -2,7 +2,7 @@
   <%= image_tag current_user.user_detail.avatar, class:"dashboard-av" if current_user.user_detail.avatar.attached? %>
 
   <h1>Dashboard</h1><br>
-  <%= link_to "My profile", user_profile_path(current_user) %>
+  <%= link_to "View/edit profile", user_profile_path(current_user) %>
 </div>
 
 <hr>

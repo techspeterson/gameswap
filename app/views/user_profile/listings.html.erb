@@ -1,4 +1,6 @@
-<h1>All Listings</h1>
+<%= render "quick_info", user: @user %>
+
+<h1>Listings by <%= @user.username %></h1>
 
 <% if @user.listings.any? %>
   <% @user.listings.each do |listing| %>

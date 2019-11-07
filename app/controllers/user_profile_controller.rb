@@ -21,7 +21,7 @@ class UserProfileController < ApplicationController
   # dashboard for logged-in users. displays the user's listings and wishlist
   def dashboard
     # displays the admin dashboard if current user is admin
-    if current_user.user_detail.is_admin
+    if current_user.is_admin
       @users = User.order("username")
       render :admin_dashboard
     # sold parameter can be toggled on the dashboard to display either sold or unsold listings

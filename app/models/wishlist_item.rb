@@ -1,4 +1,6 @@
 class WishlistItem < ApplicationRecord
+  default_scope { order(title: :asc) }
+
   # model relations
   belongs_to :user
 

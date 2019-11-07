@@ -14,7 +14,7 @@ class Listing < ApplicationRecord
 
   # field validations
   validates :title, :condition, :price, :platform, :genre, presence: true
-  validates :title, length: { in: 5..100, too_short: "should be at least %{count} characters", too_long: "should be no more than %{count} characters" }
+  validates :title, length: { in: 3..100, too_short: "should be at least %{count} characters", too_long: "should be no more than %{count} characters" }
   validates :price, numericality: true
 
   # listing image validations (with active_storage_validations gem)

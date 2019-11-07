@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'open-uri'
 
-admin = User.new(username: "admin", email: "fake@email.com", password: "secret", password_confirmation: "secret")
-admin.user_detail = UserDetail.new(bio: "admin user", is_admin: true)
+admin = User.new(username: "admin", email: "fake@email.com", password: "secret", password_confirmation: "secret", is_admin: true)
+admin.user_detail = UserDetail.new(bio: "admin user")
 admin.save!
 
 user = User.new(username: "cherry", email: "bigacid@superdeadly.com", password: "nemesis", password_confirmation: "nemesis")
@@ -25,6 +25,12 @@ end
 
 ISO3166::Country.all_translated.each do |country|
   Country.create(name: country)
+end
+
+users = User.where("is_admin is false")
+
+users.each do |user|
+  Address.create(address_line_1: Faker::Address.street_address, address_line_2: Faker::Address.secondary_address, city: Faker::Address.city, state: Faker::Address.state, country: Country.all.sample, postcode: Faker::Address.postcode, user: user)
 end
 
 action_games = ["Platformer", "Shooter", "Fighting", "Beat 'em up", "Stealth", "Survival", "Battle Royale", "Rhythm"]
@@ -92,7 +98,6 @@ all_gens.each_with_index do |gen, index|
   end
 end
 
-users = User.all
 10.times do |i|
   Listing.create!(title: Faker::Game.title, condition: rand(0..3), price: rand(1..50), user: users.sample, platform: Platform.all.sample, genre: Genre.all.sample)
 end

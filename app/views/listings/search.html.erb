@@ -17,6 +17,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :user_address_country_name_eq, "Location" %>
+    <%= f.select :user_address_country_name_eq, options_for_select(Country.search_select_options) %>
+  </div>
+
+  <div class="field">
     <%= f.label :user_username_cont, "User" %>
     <%= f.search_field :user_username_cont, placeholder: "username" %>
   </div>

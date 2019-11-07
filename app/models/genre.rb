@@ -1,4 +1,6 @@
 class Genre < ApplicationRecord
+  default_scope { order(name: :asc) }
+
   # model relations
   has_many :listings, inverse_of: :genre
 
