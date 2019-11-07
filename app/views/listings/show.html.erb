@@ -7,13 +7,16 @@
   <div class="listing-container-inner">
     <div class="listing-info">
       <p>
-        <strong>Posted:</strong> <%= @listing.created_at %> by <%= link_to @listing.user.username, user_profile_path(@listing.user) %><br>
+        <strong>Posted:</strong> <%= @listing.created_at %> by <%= link_to user_profile_path(@listing.user) do %>
+          <%= @listing.user.username %> <%= @listing.user.address.emoji_flag if @listing.user.address %>
+        <% end %>
+        <br>
         <strong>Platform:</strong> <%= @listing.platform.manufacturer %> <%= @listing.platform.name %><br>
         <strong>Genre:</strong> <%= @listing.genre.name %><br>
         <strong>Condition:</strong> <%= @listing.condition.humanize %>
       </p>
 
-      <h1><%= number_to_currency(@listing.price) %></h1>
+      <h1 class="listing-price"><%= number_to_currency(@listing.price) %></h1>
       <% if user_signed_in? && @listing.user != current_user %>
         <button data-stripe="payment">Purchase</button>
       <% end %>

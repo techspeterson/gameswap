@@ -5,7 +5,7 @@ class ListingsController < ApplicationController
   def index
     # search queries are redirected to the listings index
     # listings are displayed in accordance with the search query @q
-    @listings = @q.result.includes(:genre).includes(:platform).includes(:user).where("is_sold is false")
+    @listings = @q.result.includes(:genre).includes(:platform).includes(:user).where("is_sold is false").page params[:page]
   end
 
   def show

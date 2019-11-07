@@ -8,3 +8,5 @@ Sort by:
 <% @listings.each do |listing| %>
   <%= render "card", listing: listing %>
 <% end %>
+
+<%= paginate @listings %>

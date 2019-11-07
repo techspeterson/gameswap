@@ -76,3 +76,5 @@ gem "faker", "~> 2.6"
 gem "ransack", "~> 2.3"
 
 gem "stripe", "~> 5.7"
+
+gem "kaminari", "~> 1.1"

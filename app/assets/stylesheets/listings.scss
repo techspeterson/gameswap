@@ -2,12 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$purple1: #8D66A9;
+$purple2: #5B378E;
+$pink: #E9A1C7;
+$pink2: #DD63A2;
+$yellow: #F5EE79;
+$blue: #AEC6EA;
+
 // List of listings
 .listing-card {
   width: 70%;
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid black;
+  border: 1px solid $purple2;
   border-radius: 5px;
 }
 
@@ -18,17 +25,26 @@
 }
 
 .listing-price {
-  color: mediumseagreen;
+  color: $pink2;
 }
 
 .listing-title {
-  color: darkslategrey;
+  color: $purple2;
 }
 
 .listing-card-img {
   max-width: 200px;
   float: left;
   margin-right: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+
+  * {
+    margin: 0 5px;
+  }
 }
 
 // Listing show page
