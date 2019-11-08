@@ -2,13 +2,14 @@
   <%= image_tag current_user.user_detail.avatar, class:"dashboard-av" if current_user.user_detail.avatar.attached? %>
 
   <h1>Dashboard</h1><br>
-  <%= link_to "View/edit profile", user_profile_path(current_user) %>
+  <%= link_to "View/edit profile", user_profile_path(current_user) %><br>
+  <%= link_to "My purchase history", history_path %>
 </div>
 
 <hr>
 
 <h2>My Listings</h2>
-<%= link_to "Add new listing", new_listing_path %><br>
+<p><%= link_to "Add new listing", new_listing_path %></p>
 
 View:
 <% if @sold %>
@@ -20,9 +21,35 @@ View:
 <% end %>
 
 <% if @listings.any? %>
-  <% @listings.each do |listing| %>
-    <%= render "listings/card_mine", listing: listing %>
-  <% end %>
+  <table>
+    <tr>
+      <th>Listing</th>
+      <th>Price</th>
+      <th>Posted at</th>
+      <% if @sold %>
+        <th>Purchased by</th>
+        <th>Purchased at</th>
+      <% else %>
+        <th colspan="2"></th>
+      <% end %>
+    </tr>
+    <% @listings.each do |listing| %>
+    <!--    <%= render "listings/card_mine", listing: listing %> -->
+      <tr>
+        <td><%= link_to listing.title, listing_path(listing) %></td>
+        <td><%= number_to_currency(listing.price) %></td>
+        <td><%= listing.created_at %></td>
+        <% if @sold %>
+          <td><%= render "user_profile/username", user: listing.purchase.user %></td>
+          <td><%= listing.purchase.created_at %></td>
+        <% else %>
+          <td><%= link_to "Edit", edit_listing_path(listing) %></td>
+          <td><%= link_to "Delete", listing_path(listing), method: :delete, data: { confirm: "Are you sure?" } if can? :destroy, listing %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= paginate @listings %>
 <% else %>
   <p><em>No listings</em></p>
 <% end %>

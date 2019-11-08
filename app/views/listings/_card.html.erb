@@ -4,8 +4,6 @@
   <h2 class="listing-price"><%= number_to_currency(listing.price) %></h2><br>
   <strong>Platform:</strong> <%= listing.platform.manufacturer %> <%= listing.platform.name %><br>
   <strong>Condition:</strong> <%= listing.condition.humanize %><br>
-  Posted by <%= link_to user_profile_path(listing.user) do %>
-    <%= listing.user.username %> <%= listing.user.address.emoji_flag if listing.user.address %>
-  <% end %>
+  Posted by <%= render "user_profile/username", user: listing.user %>
    at <%= listing.created_at %>
 </div>

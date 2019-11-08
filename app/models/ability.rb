@@ -13,6 +13,7 @@ class Ability
       can :crud, User, id: user.id
       can :crud, [Listing, UserDetail, Address, WishlistItem], user_id: user.id
       cannot :create, Listing if !user.address
+      cannot :update, Listing, is_sold: true
 
       if user.is_admin
         can :manage, :all

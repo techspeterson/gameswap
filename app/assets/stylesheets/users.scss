@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$purple1: #8D66A9;
+$purple2: #5B378E;
+$pink: #E9A1C7;
+$pink2: #DD63A2;
+$yellow: #F5EE79;
+$blue: #AEC6EA;
+
 .profile-av {
   max-width: 160px;
   border-radius: 50%;
@@ -37,4 +44,22 @@
   max-width: 124px;
   border-radius: 50%;
   float: right;
+}
+
+table {
+  width: 100%;
+  margin: 10px 0;
+
+  th {
+    background: $pink;
+    color: $purple2;
+  }
+
+  tr:nth-of-type(odd) {
+    background: #FAF7BC;
+  }
+
+  td {
+    text-align: center;
+  }
 }

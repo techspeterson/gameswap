@@ -1,0 +1,30 @@
+<%= render "quick_info", user: current_user %>
+
+<h2>Purchase History</h2>
+
+<% if @purchases.any? %>
+  <table>
+    <tr>
+      <th>Listing</th>
+      <th>Posted by</th>
+      <th>Price</th>
+      <th>Date purchased</th>
+    </tr>
+    <% @purchases.each do |purchase| %>
+      <tr>
+        <td><%= link_to purchase.listing.title, listing_path(purchase.listing) %></td>
+        <td><%= link_to user_profile_path(purchase.listing.user) do %>
+          <%= render "user_profile/username", user: purchase.listing.user %>
+          <% end %></td>
+        <td><%= number_to_currency(purchase.listing.price) %></td>
+        <td><%= purchase.created_at %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= paginate @purchases %>
+<% else %>
+  <em>No purchase history.</em>
+<% end %>
+
+<p><%= link_to "Back", :back %></p>

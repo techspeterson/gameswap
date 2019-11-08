@@ -18,6 +18,11 @@ class UserProfileController < ApplicationController
     authorize! :read, @user
   end
 
+  # purchase history for user
+  def history
+    @purchases = current_user.purchases.page params[:page]
+  end
+
   # dashboard for logged-in users. displays the user's listings and wishlist
   def dashboard
     # displays the admin dashboard if current user is admin
@@ -27,10 +32,10 @@ class UserProfileController < ApplicationController
     # sold parameter can be toggled on the dashboard to display either sold or unsold listings
     elsif params[:sold]
       @sold = true
-      @listings = current_user.listings.where("is_sold is true")
+      @listings = current_user.listings.where("is_sold is true").order("created_at desc").page params[:page]
     else
       @sold = false
-      @listings = current_user.listings.where("is_sold is false")
+      @listings = current_user.listings.where("is_sold is false").order("created_at desc").page params[:page]
     end
   end
 

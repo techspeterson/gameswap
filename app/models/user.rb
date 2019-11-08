@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :wishlist_items, dependent: :destroy
   has_one :address, dependent: :destroy
   has_one :user_detail, dependent: :destroy
+  has_many :purchases, dependent: :destroy
 
   # validations
   validates :username, length: { in: 5..15, too_short: "should be at least %{count} characters", too_long: "should be no more than %{count} characters" }

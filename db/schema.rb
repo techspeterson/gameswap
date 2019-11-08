@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_07_032018) do
+ActiveRecord::Schema.define(version: 2019_11_08_034837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2019_11_07_032018) do
     t.string "title", null: false
     t.text "description"
     t.integer "condition", null: false
-    t.decimal "price", default: "1.0", null: false
+    t.decimal "price", precision: 8, scale: 2, default: "1.0", null: false
     t.boolean "is_sold", default: false
     t.bigint "user_id"
     t.bigint "platform_id"
@@ -84,6 +84,15 @@ ActiveRecord::Schema.define(version: 2019_11_07_032018) do
     t.integer "generation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "listing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_purchases_on_listing_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
   create_table "user_details", force: :cascade do |t|
@@ -124,6 +133,8 @@ ActiveRecord::Schema.define(version: 2019_11_07_032018) do
   add_foreign_key "listings", "genres"
   add_foreign_key "listings", "platforms"
   add_foreign_key "listings", "users"
+  add_foreign_key "purchases", "listings"
+  add_foreign_key "purchases", "users"
   add_foreign_key "user_details", "users"
   add_foreign_key "wishlist_items", "users"
 end

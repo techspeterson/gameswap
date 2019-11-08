@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "/", to: "listings#index", as: "root"
   get "/dashboard", to: "user_profile#dashboard", as: "dashboard"
+  get "/history", to: "user_profile#history", as: "history"
   get "/admin/dashboard", to: "user_profile#admin_dashboard", as: "admin_dashboard"
 
   get "/user_profile/:user_id", to: "user_profile#show", as: "user_profile"

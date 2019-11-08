@@ -22,6 +22,8 @@ class PaymentsController < ApplicationController
     listing.is_sold = true
     listing.save
 
+    Purchase.create(user_id: user_id, listing: listing)
+
     p "listing id " + listing_id
     p "user id " + user_id
 
