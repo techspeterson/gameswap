@@ -1,18 +1,11 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 require 'open-uri'
 
 admin = User.new(username: "admin", email: "fake@email.com", password: "secret", password_confirmation: "secret", is_admin: true)
 admin.user_detail = UserDetail.new(bio: "admin user")
 admin.save!
 
-user = User.new(username: "cherry", email: "bigacid@superdeadly.com", password: "nemesis", password_confirmation: "nemesis")
-user.user_detail = UserDetail.new(bio: "big acid super deadly")
+user = User.new(username: "techs", email: "tess@coderacademy.com", password: "cherry", password_confirmation: "cherry")
+user.user_detail = UserDetail.new(bio: "it's me!")
 user.save!
 
 5.times do |i|
@@ -98,6 +91,8 @@ all_gens.each_with_index do |gen, index|
   end
 end
 
-10.times do |i|
+Platform.create!(name: "PC", generation: 0)
+
+20.times do |i|
   Listing.create!(title: Faker::Game.title, condition: rand(0..3), price: rand(1..50), user: users.sample, platform: Platform.all.sample, genre: Genre.all.sample)
 end

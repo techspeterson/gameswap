@@ -55,7 +55,7 @@ a:hover {
 }
 
 .home-icon {
-  color: $pink;
+  color: $yellow;
 }
 
 #main-nav {
@@ -213,13 +213,17 @@ a:hover {
   content: "*";
 }
 
-button, input[type=submit] {
+button, input[type=submit], .button {
   padding: 5px 7px;
   background: #5B378E;
   border-radius: 5px;
   border: 0;
   color: #E9A1C7;
   font-weight: 600;
+}
+
+.button:hover {
+  color: $yellow;
 }
 
 label::after {

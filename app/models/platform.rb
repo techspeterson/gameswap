@@ -14,6 +14,11 @@ class Platform < ApplicationRecord
       gen_platforms = Platform.where("generation = #{index}").collect {|u| [u.name, u.id]}
       platform_list.concat(gen_platforms)
     end
+
+    platform_list << ["--- Other", ""]
+    other_platforms = Platform.where("generation = 0").collect {|u| [u.name, u.id]}
+    platform_list.concat(other_platforms)
+
     return platform_list
   end
 
@@ -28,6 +33,11 @@ class Platform < ApplicationRecord
       gen_platforms = Platform.where("generation = #{index}").collect {|u| [u.name, u.name]}
       platform_list.concat(gen_platforms)
     end
+
+    platform_list << ["--- Other", 0]
+    other_platforms = Platform.where("generation = 0").collect {|u| [u.name, u.name]}
+    platform_list.concat(other_platforms)
+
     return platform_list
   end
 end
