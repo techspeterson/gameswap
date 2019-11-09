@@ -1,34 +1,40 @@
 <div class="sidebar">
-  <div class="sidebar-inner">
-    <h3>Search all listings</h3>
-    <%= search_form_for @q do |f| %>
-      <!--<%= f.label :title_cont %>-->
-      <%= f.search_field :title_cont, placeholder: "Search by game title" %>
-      <%= f.submit %>
-    <% end %>
+  <div class="sidebar-content">
+    <div class="sidebar-inner">
+      <h3>Search all listings</h3>
+      <%= search_form_for @q do |f| %>
+        <!--<%= f.label :title_cont %>-->
+        <%= f.search_field :title_cont, placeholder: "Search by game title" %>
+        <%= f.submit %>
+      <% end %>
+    </div>
 
-    <h3>Browse listings</h3>
-    <%= link_to "Browse latest", listings_path %>
-    <%= link_to "Browse by title", listings_path(q: {sorts: "title asc"}) %>
-    <%= link_to "Browse by price", listings_path(q: {sorts: "price asc"}) %>
+    <div class="sidebar-inner">
+      <h3>Browse listings</h3>
+      <%= link_to "Browse latest", listings_path %>
+      <%= link_to "Browse by title", listings_path(q: {sorts: "title asc"}) %>
+      <%= link_to "Browse by price", listings_path(q: {sorts: "price asc"}) %>
+    </div>
 
-    <h4>Browse by platform</h4>
+    <div class="sidebar-inner">
+      <h4>Browse by platform</h4>
 
-    <%= search_form_for @q do |f| %>
-      <!--<%= f.label :platform_name_eq %>-->
-      <%= f.select :platform_name_eq, options_for_select(Platform.search_select_options) %>
-      <%= f.submit %>
-    <% end %>
+      <%= search_form_for @q do |f| %>
+        <!--<%= f.label :platform_name_eq %>-->
+        <%= f.select :platform_name_eq, options_for_select(Platform.search_select_options) %>
+        <%= f.submit %>
+      <% end %>
 
-    <h4>Browse by genre</h4>
+      <h4>Browse by genre</h4>
 
-    <%= search_form_for @q do |f| %>
-      <!--<%= f.label :genre_name_cont %>-->
-      <%= f.select :genre_name_cont, options_for_select(Genre.search_select_options) %>
-      <%= f.submit %>
-    <% end %>
+      <%= search_form_for @q do |f| %>
+        <!--<%= f.label :genre_name_cont %>-->
+        <%= f.select :genre_name_cont, options_for_select(Genre.search_select_options) %>
+        <%= f.submit %>
+      <% end %>
 
-    <h4><%= link_to "Advanced search", search_path %></h4>
+      <h4><%= link_to "Advanced search", search_path %></h4>
+    </div>
   </div>
 
   <div class="sidebar-footer">

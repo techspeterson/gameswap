@@ -166,7 +166,7 @@ a:hover {
   }
 }
 
-.sidebar-inner {
+.sidebar-content, .sidebar-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -256,4 +256,47 @@ p {
 
 hr {
   margin: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+  .container, #main-nav {
+    width: 100vw;
+  }
+
+  .container {
+    flex-direction: column-reverse;
+  }
+
+  .sidebar {
+    width: 100vw;
+    height: 200px;
+    flex-direction: row;
+  }
+
+  .sidebar-content {
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .container, #main-nav {
+    width: 100%;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .content {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .listing-card {
+    margin-left: 0;
+    margin-right: 0;
+    width: 90%;
+  }
 }
