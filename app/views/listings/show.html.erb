@@ -8,6 +8,9 @@
   <p><%= link_to "Edit listing", edit_listing_path(@listing) %></p>
 <% end %>
 
+<% if can? :destroy, @listing %>
+  <p><%= link_to "Delete listing", listing_path(@listing), method: :delete, data: { confirm: "Are you sure?" } %></p>
+<% end %>
 
 <div class="listing-container">
 
@@ -21,10 +24,12 @@
         <strong>Condition:</strong> <%= @listing.condition.humanize %>
       </p>
 
-      <h1 class="listing-price"><%= number_to_currency(@listing.price) %></h1>
-      <% if user_signed_in? && @listing.user != current_user && !@listing.is_sold %>
-        <button data-stripe="payment">Purchase</button>
-      <% end %>
+      <p>
+        <h1 class="listing-price"><%= number_to_currency(@listing.price) %></h1>
+        <% if user_signed_in? && @listing.user != current_user && !@listing.is_sold %>
+          <button data-stripe="payment">Purchase</button>
+        <% end %>
+      </p>
     </div>
 
     <%= image_tag @listing.image, class:"listing-img" if @listing.image.attached? %>
