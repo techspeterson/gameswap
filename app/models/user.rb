@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :authentication_keys => [:username]
 
   # model relations
-  # all dependent entries are destroyed when a user is destroyed
+  # all dependent entries are destroyed when a user is destroyed (should be revisited in the future... this could cause problems with purchase history, etc)
   has_many :listings, dependent: :destroy
   has_many :wishlist_items, dependent: :destroy
   has_one :address, dependent: :destroy

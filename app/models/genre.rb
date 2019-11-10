@@ -7,7 +7,7 @@ class Genre < ApplicationRecord
   # validations
   validates :name, presence: true
 
-  # select options in listing crud forms
+  # select options in listing create/update forms
   def self.select_options
     Genre.order("name").collect {|u| [u.name, u.id]}
   end

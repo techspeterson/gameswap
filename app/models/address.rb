@@ -6,6 +6,7 @@ class Address < ApplicationRecord
   # validations
   validates :address_line_1, :city, :postcode, presence: true
 
+  # displays the emoji flag for the country associated with the address
   def emoji_flag
     ISO3166::Country.find_country_by_name(country.name).emoji_flag
   end

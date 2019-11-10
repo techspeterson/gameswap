@@ -4,7 +4,9 @@ class ListingsController < ApplicationController
 
   def index
     # search queries are redirected to the listings index
-    # listings are displayed in accordance with the search query @q
+    # listings are displayed in accordance with the search query @q (the .includes method calls allow fields in related objects to be searched)
+    # .where retrieves only unsold records
+    # .page params[:page] returns the current page of listings (currently 10 listings per page)
     @listings = @q.result.includes(:genre).includes(:platform).includes(:user).where("is_sold is false").page params[:page]
   end
 
@@ -38,19 +40,20 @@ class ListingsController < ApplicationController
   end
 
   def new
-    # initialises a blank listing
+    # initialises a blank listing for the current user
     @listing = Listing.new
     @listing.user = current_user
     authorize! :create, @listing
   end
 
   def create
-    # creates a listing for the current user with the submitted params (if valid)
+    # initialises a listing for the current user with the submitted data
     @listing = Listing.new(listing_params)
     @listing.user = current_user
     authorize! :create, @listing
     @listing.user = current_user
 
+    # saves the listing to the database (if valid)
     if @listing.save
       redirect_to @listing
     else
@@ -64,6 +67,7 @@ class ListingsController < ApplicationController
 
   def update
     authorize! :update, @listing
+    # updates the listing in the database with the submitted data (if valid)
     if @listing.update(listing_params)
       redirect_to @listing
     else
@@ -73,6 +77,7 @@ class ListingsController < ApplicationController
 
   def destroy
     authorize! :destroy, @listing
+    # removes the listing from the database
     @listing.destroy
     redirect_to listings_path
   end

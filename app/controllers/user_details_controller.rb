@@ -12,6 +12,7 @@ class UserDetailsController < UserProfileController
   def update
     authorize! :update, @user.user_detail
 
+    # updates the userdetail with the submitted data (if valid)
     if @user.user_detail.update(user_params)
       redirect_to user_profile_path(@user), notice: "Profile updated successfully"
     else

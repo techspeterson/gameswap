@@ -1,13 +1,15 @@
 class Platform < ApplicationRecord
+  # platforms are ordered alphabetically before select options are generated
   default_scope { order(name: :asc) }
 
   # model relations
   has_many :listings, inverse_of: :platform
 
-  # select options in listing crud forms
+  # select options in listing crud forms (return the platform id)
   def self.select_options
     platform_list = []
 
+    # for each console generation, add heading, then add the consoles
     8.times do |index|
       index += 1
       platform_list << ["--- Generation #{index}", ""]
@@ -22,11 +24,12 @@ class Platform < ApplicationRecord
     return platform_list
   end
 
-  # select options in search forms
+  # select options in search forms (return the platform name)
   def self.search_select_options
     platform_list = []
     platform_list << ["--- All Platforms ---", ""]
 
+    # for each console generation, add heading, then add the consoles
     8.times do |index|
       index += 1
       platform_list << ["--- Generation #{index}", index]

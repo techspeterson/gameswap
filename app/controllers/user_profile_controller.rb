@@ -20,6 +20,7 @@ class UserProfileController < ApplicationController
 
   # purchase history for user
   def history
+    # retrieves a paginated list of the current user's purchases
     @purchases = current_user.purchases.page params[:page]
   end
 
@@ -27,14 +28,17 @@ class UserProfileController < ApplicationController
   def dashboard
     # displays the admin dashboard if current user is admin
     if current_user.is_admin
+      # retrieves a list of all users, ordered by username
       @users = User.order("username")
       render :admin_dashboard
     # sold parameter can be toggled on the dashboard to display either sold or unsold listings
     elsif params[:sold]
       @sold = true
+      # retrieves a paginated list of all of the users SOLD listings, ordered by date posted (descending)
       @listings = current_user.listings.where("is_sold is true").order("created_at desc").page params[:page]
     else
       @sold = false
+      # retrieves a paginated list of all of the users UNSOLD listings, ordered by date posted (descending)
       @listings = current_user.listings.where("is_sold is false").order("created_at desc").page params[:page]
     end
   end
