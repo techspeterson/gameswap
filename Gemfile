@@ -77,4 +77,4 @@ gem "ransack", "~> 2.3"
 
 gem "stripe", "~> 5.7"
 
-gem "kaminari", "~> 1.1"
+gem "kaminari", "~> 1.2"
